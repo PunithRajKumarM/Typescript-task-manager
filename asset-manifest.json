@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Typescript-task-manager/static/css/main.1de675d1.css",
+    "main.js": "/Typescript-task-manager/static/js/main.2c5b56f8.js",
+    "static/js/787.8dadcd0a.chunk.js": "/Typescript-task-manager/static/js/787.8dadcd0a.chunk.js",
+    "index.html": "/Typescript-task-manager/index.html",
+    "main.1de675d1.css.map": "/Typescript-task-manager/static/css/main.1de675d1.css.map",
+    "main.2c5b56f8.js.map": "/Typescript-task-manager/static/js/main.2c5b56f8.js.map",
+    "787.8dadcd0a.chunk.js.map": "/Typescript-task-manager/static/js/787.8dadcd0a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1de675d1.css",
+    "static/js/main.2c5b56f8.js"
+  ]
+}

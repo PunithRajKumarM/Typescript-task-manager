@@ -5,6 +5,9 @@ import EditModal from "../Modal/EditModal";
 import Modal from "../Modal/Modal";
 import "./TaskPage.css";
 import { useDispatch, useSelector } from "react-redux";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { Button, Typography } from "@mui/material";
 
 const TaskPage = () => {
   const modal = useSelector((state: RootState) => state.modal);
@@ -33,10 +36,10 @@ const TaskPage = () => {
   return (
     <div className="taskPageWrapper">
       <div className="taskPage">
-        <h1>Task Manager</h1>
-        <button className="taskPageButton" onClick={handleModal}>
+        <Typography variant="h3" component="h1">Task manager</Typography>
+        <Button className="taskPageButton" onClick={handleModal}>
           Add Task
-        </button>
+        </Button>
       </div>
       {displayModal && <Modal />}
 
@@ -51,12 +54,8 @@ const TaskPage = () => {
                   <h3>{task.taskName}</h3>
                   <p>{task.taskDescription}</p>
                   <div className="taskButtons">
-                    <button onClick={() => handleOpenEditModal(task)}>
-                      Edit
-                    </button>
-                    <button onClick={() => handleDeleteTask(task)}>
-                      Delete
-                    </button>
+                    <EditIcon onClick={() => handleOpenEditModal(task)} />
+                    <DeleteIcon onClick={() => handleDeleteTask(task)} />
                   </div>
                 </div>
                 <div className="taskListTime">

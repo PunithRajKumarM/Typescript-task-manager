@@ -2,12 +2,15 @@ import { showEditModal, showModal } from "../../store/modalSlice";
 import { RootState } from "../../store/store";
 import { Task, editTask, removeTask } from "../../store/taskSlice";
 import EditModal from "../Modal/EditModal";
-import Modal from "../Modal/Modal";
+// import Modal from "../Modal/Modal";
 import "./TaskPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Button, Typography } from "@mui/material";
+import Navbar from "../../mui/Navbar";
+import { Button } from "@mui/material";
+import BasicModal from "../../mui/Modal";
+import AddTaskButton from "../../mui/AddTaskButton";
 
 const TaskPage = () => {
   const modal = useSelector((state: RootState) => state.modal);
@@ -35,14 +38,9 @@ const TaskPage = () => {
 
   return (
     <div className="taskPageWrapper">
-      <div className="taskPage">
-        <Typography variant="h3" component="h1">Task manager</Typography>
-        <Button className="taskPageButton" onClick={handleModal}>
-          Add Task
-        </Button>
-      </div>
-      {displayModal && <Modal />}
-
+      <Navbar />
+      <AddTaskButton handleModal={handleModal} />
+      {displayModal && <BasicModal openModal={displayModal} />}
       <div className="tasksList">
         {tasks.length === 0 && <p className="noTaskText">No tasks available</p>}
         {tasks.length > 0 && (

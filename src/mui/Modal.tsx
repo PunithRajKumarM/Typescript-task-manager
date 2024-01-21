@@ -2,9 +2,11 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button, TextField } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { hideModal } from "../store/modalSlice";
+import { addTask } from "../store/taskSlice";
 
 interface BasicModalProps {
   openModal: boolean;
@@ -26,12 +28,47 @@ const style = {
 };
 
 export default function BasicModal({ openModal }: BasicModalProps) {
-  const [taskNameValue, setTaskNameValue] = useState("");
+  const [taskValue, setTaskValue] = useState("");
   const [taskDescriptionValue, setTaskDescriptionValue] = useState("");
+  const dispatch = useDispatch();
 
   const modal = useSelector((state: RootState) => state.modal);
   let displayModal = modal.modal;
   console.log(displayModal);
+
+  function inputTaskHandler(e: ChangeEvent<HTMLInputElement>) {
+    setTaskValue(e.target.value);
+  }
+
+  function inputDescriptionHandler(e: ChangeEvent<HTMLInputElement>) {
+    setTaskDescriptionValue(e.target.value);
+  }
+
+  function submitTaskHandler() {
+    console.log("submitted");
+    if (!taskValue || !taskDescriptionValue) {
+      alert("Enter task detail!");
+    } else {
+      let taskData = {
+        id: Number(Math.floor(Math.random() * 100)),
+        taskName: taskValue,
+        taskDescription: taskDescriptionValue,
+        isEditable: false,
+        isEdited: false,
+        submittedTime: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()} | ${new Date().getDate()}:${
+          new Date().getMonth() + 1
+        }:${new Date().getFullYear()}`,
+      };
+
+      dispatch(addTask(taskData));
+      dispatch(hideModal());
+    }
+  }
+
+  function cancelTaskHandler() {
+    console.log("Cancelled");
+    dispatch(hideModal());
+  }
 
   return (
     <Modal
@@ -50,15 +87,29 @@ export default function BasicModal({ openModal }: BasicModalProps) {
         >
           Add task
         </Typography>
-        <TextField id="outlined-multiline-static" label="Task" rows={4} />
         <TextField
           id="outlined-multiline-static"
+          label="Task"
+          rows={4}
+          autoComplete="off"
+          onChange={inputTaskHandler}
+          value={taskValue}
+          inputProps={{ minLength: 3, maxLength: 10 }}
+          required
+        />
+        <TextField
+          id="outlined-multiline-static-description"
           label="Description"
           rows={4}
+          autoComplete="off"
+          onChange={inputDescriptionHandler}
+          value={taskDescriptionValue}
+          inputProps={{ minLength: 5, maxLength: 50 }}
+          required
         />
         <div className="TaskMuiButton">
-          <Button>Add</Button>
-          <Button>Cancel</Button>
+          <Button onClick={submitTaskHandler}>Add</Button>
+          <Button onClick={cancelTaskHandler}>Cancel</Button>
         </div>
       </Box>
     </Modal>

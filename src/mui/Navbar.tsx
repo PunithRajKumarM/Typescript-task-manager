@@ -20,7 +20,7 @@ export default function Navbar() {
               textDecoration: "none",
             }}
           >
-            TASK MANAGEMENT
+            TASK MANAGER
           </Typography>
         </Toolbar>
       </Container>

@@ -1,7 +1,7 @@
 import { showEditModal, showModal } from "../../store/modalSlice";
 import { RootState } from "../../store/store";
 import { Task, editTask, removeTask } from "../../store/taskSlice";
-import EditModal from "../Modal/EditModal";
+import EditModal from "../../mui/EditModal";
 import "./TaskPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -45,7 +45,7 @@ const TaskPage = () => {
           <>
             {tasks.map((task) => (
               <div key={task.id} className="taskListWrapper">
-                {displayEditModal && <EditModal />}
+                {displayEditModal && <EditModal openModal={displayEditModal} />}
                 <div className="taskList">
                   <h3>{task.taskName}</h3>
                   <p>{task.taskDescription}</p>

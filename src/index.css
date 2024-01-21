@@ -19,3 +19,12 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.TaskListMui {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}

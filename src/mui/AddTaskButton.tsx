@@ -19,6 +19,7 @@ export default function AddTaskButton({ handleModal }: InputFieldProps) {
     >
       <Button
         className="taskPageButton"
+        style={{ backgroundColor: "#1976d2" }}
         onClick={handleModal}
         variant="contained"
       >

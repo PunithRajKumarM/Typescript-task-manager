@@ -2,13 +2,11 @@ import { showEditModal, showModal } from "../../store/modalSlice";
 import { RootState } from "../../store/store";
 import { Task, editTask, removeTask } from "../../store/taskSlice";
 import EditModal from "../Modal/EditModal";
-// import Modal from "../Modal/Modal";
 import "./TaskPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Navbar from "../../mui/Navbar";
-import { Button } from "@mui/material";
 import BasicModal from "../../mui/Modal";
 import AddTaskButton from "../../mui/AddTaskButton";
 

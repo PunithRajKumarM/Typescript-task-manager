@@ -2,6 +2,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button, TextField } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { useState } from "react";
 
 interface BasicModalProps {
   openModal: boolean;
@@ -23,10 +26,17 @@ const style = {
 };
 
 export default function BasicModal({ openModal }: BasicModalProps) {
+  const [taskNameValue, setTaskNameValue] = useState("");
+  const [taskDescriptionValue, setTaskDescriptionValue] = useState("");
+
+  const modal = useSelector((state: RootState) => state.modal);
+  let displayModal = modal.modal;
+  console.log(displayModal);
+
   return (
     <Modal
       open={openModal}
-      // onClose
+      // onClose={}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >

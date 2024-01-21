@@ -1,10 +1,13 @@
-import { showEditModal, showModal } from "../../store/modalSlice";
+import { showModal } from "../../store/modalSlice";
 import { RootState } from "../../store/store";
-import { Task, editTask, removeTask } from "../../store/taskSlice";
-import EditModal from "../Modal/EditModal";
-import Modal from "../Modal/Modal";
 import "./TaskPage.css";
 import { useDispatch, useSelector } from "react-redux";
+
+import Navbar from "../../mui/Navbar";
+import BasicModal from "../../mui/Modal";
+import AddTaskButton from "../../mui/AddTaskButton";
+import TaskList from "../../mui/Task";
+import { Typography } from "@mui/material";
 
 const TaskPage = () => {
   const modal = useSelector((state: RootState) => state.modal);
@@ -21,53 +24,24 @@ const TaskPage = () => {
     dispatch(showModal());
   }
 
-  function handleDeleteTask(task: Task) {
-    dispatch(removeTask(task));
-  }
-
-  function handleOpenEditModal(task: Task) {
-    dispatch(editTask(task));
-    dispatch(showEditModal());
-  }
-
   return (
     <div className="taskPageWrapper">
-      <div className="taskPage">
-        <h1>Task Manager</h1>
-        <button className="taskPageButton" onClick={handleModal}>
-          Add Task
-        </button>
-      </div>
-      {displayModal && <Modal />}
-
-      <div className="tasksList">
-        {tasks.length === 0 && <p className="noTaskText">No tasks available</p>}
-        {tasks.length > 0 && (
-          <>
-            {tasks.map((task) => (
-              <div key={task.id} className="taskListWrapper">
-                {displayEditModal && <EditModal />}
-                <div className="taskList">
-                  <h3>{task.taskName}</h3>
-                  <p>{task.taskDescription}</p>
-                  <div className="taskButtons">
-                    <button onClick={() => handleOpenEditModal(task)}>
-                      Edit
-                    </button>
-                    <button onClick={() => handleDeleteTask(task)}>
-                      Delete
-                    </button>
-                  </div>
-                </div>
-                <div className="taskListTime">
-                  {task.isEdited
-                    ? `Edited on ${task.submittedTime}`
-                    : `Submitted on ${task.submittedTime}`}
-                </div>
-              </div>
-            ))}
-          </>
+      <Navbar />
+      <AddTaskButton handleModal={handleModal} />
+      {displayModal && <BasicModal openModal={displayModal} />}
+      <div>
+        {tasks.length === 0 && (
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h4"
+            color={"dodgerblue"}
+            textAlign={"center"}
+          >
+            No tasks found.
+          </Typography>
         )}
+        {tasks.length > 0 && <TaskList tasks={tasks} />}
       </div>
     </div>
   );

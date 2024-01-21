@@ -4,6 +4,7 @@ import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../../store/taskSlice";
 import { hideModal } from "../../store/modalSlice";
+import { Button } from "@mui/material";
 
 const Modal: FC = () => {
   const [taskNameValue, setTaskNameValue] = useState("");
@@ -91,9 +92,10 @@ const Modal: FC = () => {
               <tr>
                 <td></td>
                 <td className="modal-button">
-                  <button type="submit" className="modalSaveButton">
+                  {/* <button type="submit" className="modalSaveButton">
                     Save
-                  </button>
+                  </button> */}
+                  <Button type="submit" variant="contained">Save</Button>
                 </td>
               </tr>
             </tbody>

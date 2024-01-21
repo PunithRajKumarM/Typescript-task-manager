@@ -10,6 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { showEditModal } from "../store/modalSlice";
 
+const style = {
+  p: 2,
+};
+
 export default function TaskList({ tasks }: { tasks: Task[] }) {
   const modal = useSelector((state: RootState) => state.modal);
   let dispatch = useDispatch();
@@ -28,7 +32,7 @@ export default function TaskList({ tasks }: { tasks: Task[] }) {
     <div className="TaskListMui">
       {displayEditModal && <EditModal openModal={displayEditModal} />}
       {tasks.map((task) => (
-        <Card sx={{ maxWidth: 345 }} key={task.id}>
+        <Card sx={{ maxWidth: 350 }} key={task.id}>
           <CardContent>
             <Typography
               gutterBottom
@@ -48,14 +52,14 @@ export default function TaskList({ tasks }: { tasks: Task[] }) {
                 : `Submitted on ${task.submittedTime}`}
             </Typography>
           </CardContent>
-          <CardActions>
-            <div>
+          <CardActions sx={style}>
+            <div className="editDeleteButton">
               <EditIcon
-                style={{ color: "#1976d2" }}
+                style={{ color: "#1976d2", cursor: "pointer" }}
                 onClick={() => handleOpenEditModal(task)}
               />
               <DeleteIcon
-                style={{ color: "#1976d2" }}
+                style={{ color: "#1976d2", cursor: "pointer" }}
                 onClick={() => handleDeleteTask(task)}
               />
             </div>

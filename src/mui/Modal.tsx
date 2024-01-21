@@ -45,6 +45,8 @@ export default function BasicModal({ openModal }: BasicModalProps) {
   }
 
   function submitTaskHandler() {
+    let currentDate = new Date();
+    let monthString = (currentDate.getMonth() + 1).toString().padStart(2, "0");
     console.log("submitted");
     if (!taskValue || !taskDescriptionValue) {
       alert("Enter task detail!");
@@ -55,11 +57,15 @@ export default function BasicModal({ openModal }: BasicModalProps) {
         taskDescription: taskDescriptionValue,
         isEditable: false,
         isEdited: false,
-        submittedTime: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()} | ${new Date().getDate()}:${
-          new Date().getMonth() + 1
-        }:${new Date().getFullYear()}`,
+        submittedTime: `${currentDate.getDate()}:${monthString}:${currentDate.getFullYear()} at ${currentDate.toLocaleTimeString(
+          "en-US",
+          {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          }
+        )}`,
       };
-
       dispatch(addTask(taskData));
       dispatch(hideModal());
     }
